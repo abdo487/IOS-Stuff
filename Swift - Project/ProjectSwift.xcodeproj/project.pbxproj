@@ -16,6 +16,7 @@
 		CE7DDB5B2B9074130042F608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7DDB592B9074130042F608 /* LaunchScreen.storyboard */; };
 		CE7DDB662B9074140042F608 /* ProjectSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DDB652B9074140042F608 /* ProjectSwiftTests.swift */; };
 		CE7DDB712B9074140042F608 /* ProjectSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DDB702B9074140042F608 /* ProjectSwiftUITests.swift */; };
+		CE9664EA2BA0972700CECF45 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9664E92BA0972700CECF45 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		CE7DDB6C2B9074140042F608 /* ProjectSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7DDB702B9074140042F608 /* ProjectSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSwiftUITests.swift; sourceTree = "<group>"; };
 		CE7DDB722B9074140042F608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE9664E92BA0972700CECF45 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				CE620D802B972E0800CD2D3E /* DetailsViewController.swift */,
+				CE9664E92BA0972700CECF45 /* Data.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7DDB532B9074070042F608 /* ViewController.swift in Sources */,
+				CE9664EA2BA0972700CECF45 /* Data.swift in Sources */,
 				CE7DDB4F2B9074070042F608 /* AppDelegate.swift in Sources */,
 				CE7DDB512B9074070042F608 /* SceneDelegate.swift in Sources */,
 				CE620D812B972E0800CD2D3E /* DetailsViewController.swift in Sources */,

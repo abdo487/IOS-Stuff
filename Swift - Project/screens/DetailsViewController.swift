@@ -9,58 +9,76 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-    var titleLabel = UILabel(frame: CGRect(x: 20, y: 100, width:200, height: 50))
-    var capital = UILabel(frame: CGRect(x: 20, y: 100, width:200, height: 50))
-    var countryTitle: String = ""
-    var CountryDescription: String = ""
+    var country: Country?
     
+    // UI Elements
+    let flagImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
- 
-    //let descriptionLabel = UILabel()
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
-        titleLabel.text = countryTitle
-        capital.textAlignment = .center
-        capital.text = CountryDescription
-        titleLabel.textAlignment = .center
-        view.addSubview(titleLabel)
-        view.addSubview(capital)
-        
+        view.backgroundColor = .white
+        setupUI()
+        if let selectedCountry = country {
+            updateUI(with: selectedCountry)
+        }
     }
     
-    /*func setupImage() {
-        view.addSubview(imageCountry)
-        imageCountry.translatesAutoresizingMaskIntoConstraints = false
+    func setupUI() {
+        view.addSubview(flagImageView)
+        view.addSubview(nameLabel)
+        view.addSubview(descriptionLabel)
         
-        // set image
-        imageCountry.image = UIImage(named: "")
-        
-        // add constraint
         NSLayoutConstraint.activate([
-            imageCountry.widthAnchor.constraint(equalToConstant: 300),
-            imageCountry.heightAnchor.constraint(equalToConstant: 300),
-            imageCountry.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            imageCountry.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            flagImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            flagImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            flagImageView.widthAnchor.constraint(equalToConstant: 300),
+            flagImageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            nameLabel.topAnchor.constraint(equalTo: flagImageView.bottomAnchor, constant: 20),
+            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            descriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -20)
         ])
-        imageCountry.contentMode = .scaleToFill
-        imageCountry.clipsToBounds = true
     }
-    func setupTitle() {
-        // Do any additional setup after loading the view.
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        // set your title
-        titleLabel.text = "Morocco"
-        //add constraints
-        NSLayoutConstraint.activate([
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20),
-            titleLabel.topAnchor.constraint(equalTo: imageCountry.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ])
-        //
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
-    }*/
-
+    
+    func updateUI(with country: Country) {
+        nameLabel.text = country.name
+        descriptionLabel.text = country.description
+        
+        // Load flag image asynchronously
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: URL(string: country.flag)!) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.flagImageView.image = image
+                    }
+                }
+            }
+        }
+    }
 
 }

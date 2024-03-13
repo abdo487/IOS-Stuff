@@ -8,18 +8,6 @@
 
 import UIKit
 
-class Continent{
-    let name: String
-    let countries:[String]
-    var isOpened:Bool=false
-    
-    init(name: String, countries:[String], isOpened:Bool=false) {
-        self.name=name
-        self.countries=countries
-        self.isOpened=isOpened
-    }
-}
-
 class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
     
     let imageCountry = UIImageView()
@@ -40,11 +28,7 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
         //set up models
-        continents = [
-            Continent(name: "Afric", countries: ["maroc","tunis","algerer"]),
-            Continent(name: "Asia", countries: ["chine","jordan","iran","chine","jordan","iran","chine","jordan","iran","chine","jordan","iran"]),
-            Continent(name: "Europ", countries: ["espan","france","portugal","espan","france","portugal","espan","france","portugal"]),
-        ]
+        continents = CONTINENTS
         view.addSubview(tableView)
         tableView.delegate=self
         tableView.dataSource=self
@@ -68,11 +52,11 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
 
         if indexPath.row == 0 {
             cell.backgroundColor = .systemGray
-            cell.textLabel?.textColor = .white
+//            cell.textLabel?.textColor = .
             cell.textLabel?.text=continents[indexPath.section].name
             cell.accessoryType = .disclosureIndicator
         }else{
-            cell.textLabel?.text=continents[indexPath.section].countries[indexPath.row - 1]
+            cell.textLabel?.text=continents[indexPath.section].countries[indexPath.row - 1].name
             cell.backgroundColor = .systemGray6
             
         }
@@ -86,11 +70,10 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
             continents[indexPath.section].isOpened = !continents[indexPath.section].isOpened
             tableView.reloadSections([indexPath.section], with: .none)
         }else{
-            let d = continents[indexPath.section].countries[indexPath.row - 1]
-            print(d)
+            let COUNTRY: Country = continents[indexPath.section].countries[indexPath.row - 1]
             let vc = DetailsViewController()
-            vc.CountryDescription = "hello  fsadf "
-            vc.countryTitle = d
+            vc.country = COUNTRY
+        
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
